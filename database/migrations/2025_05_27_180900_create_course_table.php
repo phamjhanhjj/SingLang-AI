@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('course', function (Blueprint $table) {
             // $table->id();
-            $table->unsignedBigInteger('course_id')->primary();
+            $table->string('course_id')->primary();
             $table->string('nation');
             $table->float('total_topic');
             $table->timestamps();

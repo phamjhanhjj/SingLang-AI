@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('enrolment', function (Blueprint $table) {
             // $table->id();
-            $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('student_id');
+            $table->string('course_id');
+            $table->string('student_id');
             $table->date('enrolment_datetime');
             $table->boolean('is_completed')->default(false);
 

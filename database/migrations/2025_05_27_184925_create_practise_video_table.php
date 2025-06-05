@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('practise_video', function (Blueprint $table) {
-            $table->unsignedBigInteger('practise_video_id')->primary();
-            $table->unsignedBigInteger('course_id');
+            $table->string('practise_video_id')->primary();
+            $table->string('course_id');
             $table->string('video_link');
             $table->json('sublitle')->nullable();
             $table->integer('score')->default(0);

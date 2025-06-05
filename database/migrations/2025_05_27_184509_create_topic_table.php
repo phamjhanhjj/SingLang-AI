@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('topic', function (Blueprint $table) {
-            $table->unsignedBigInteger('topic_id')->primary();
-            $table->unsignedBigInteger('course_id');
+            $table->string('topic_id')->primary();
+            $table->string('course_id');
             $table->string('name');
             $table->integer('level')->default(1);
             $table->integer('number_of_word')->default(0);

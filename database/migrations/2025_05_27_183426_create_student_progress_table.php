@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('student_progress', function (Blueprint $table) {
             // $table->id();
-            $table->unsignedBigInteger('student_id');
+            $table->string('student_id');
             $table->float('total_score')->default(0);
             $table->float('word_score')->default(0);
             $table->float('video_score')->default(0);

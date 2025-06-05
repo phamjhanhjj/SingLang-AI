@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('word', function (Blueprint $table) {
-            $table->unsignedBigInteger('word_id')->primary();
-            $table->unsignedBigInteger('topic_id');
+            $table->string('word_id')->primary();
+            $table->string('topic_id');
             $table->string('word');
             $table->string('meaning');
             $table->integer('score')->default(0);
