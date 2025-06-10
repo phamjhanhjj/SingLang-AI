@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student_topic_record', function (Blueprint $table) {
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('topic_id');
+            $table->string('student_id');
+            $table->string('topic_id');
             $table->boolean('is_completed')->default(false);
 
             $table->foreign('student_id')

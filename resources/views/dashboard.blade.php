@@ -53,12 +53,29 @@
 
         // Khi bấm vào box, hiển thị dữ liệu bảng đó
         function showData(table) {
-            fetch(`/dashboard/data/${table}`)
-                .then(res => res.text())
-                .then(html => {
-                    document.getElementById('data-table').innerHTML = html;
-                });
-        }
+        // Hiển thị các nút CRUD phía trên bảng
+        let crudHtml = `
+            <div id="crud-buttons" style="margin-bottom:15px;">
+                <button onclick="createRecord('${table}')">Thêm</button>
+            </div>
+        `;
+        document.getElementById('data-table').innerHTML = crudHtml;
+
+        // Hiển thị dữ liệu bảng
+        fetch(`/dashboard/data/${table}`)
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('data-table').innerHTML = crudHtml + html;
+
+                // Thêm nút Sửa/Xóa cho từng dòng (nếu muốn động, cần sửa ở backend trả về)
+                // Hoặc bạn có thể render luôn nút Sửa/Xóa trong HTML table ở backend
+            });
+    }
+
+    // Hàm xử lý khi nhấn Thêm
+    function createRecord(table) {
+        window.location.href = `/crud/${table}/create`;
+    }
 
         // Tải danh sách bảng khi trang vừa load
         window.onload = function() {

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student_word_record', function (Blueprint $table) {
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('word_id');
+            $table->string('student_id');
+            $table->string('word_id');
             $table->boolean('is_learned')->default(false);
             $table->integer('replay_time')->default(0);
             $table->boolean('is_mastered')->default(false);
