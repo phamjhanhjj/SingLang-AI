@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function store(Request $request){
         $validaytion = $request->validate([
-            'user_name' => 'required|string|unique:user,user_name',
+            'user_name' => 'required|string|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
