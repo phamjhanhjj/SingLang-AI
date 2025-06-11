@@ -23,7 +23,7 @@ Route::get('/dashboard/tables', [\App\Http\Controllers\DashboardController::clas
 Route::get('/dashboard/data/{type}', [\App\Http\Controllers\DashboardController::class, 'getData'])->name('dashboard.data');
 
 //student
-Route::resource('student', StudentController::class);
+// Route::resource('student', StudentController::class);
 
 //Dynamic CRUD
 Route::prefix('crud/{table}')->group(function () {
