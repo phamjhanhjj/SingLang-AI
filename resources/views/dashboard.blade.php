@@ -80,7 +80,70 @@
         // Tải danh sách bảng khi trang vừa load
         window.onload = function() {
             loadAllTables();
+            const urlParams = new URLSearchParams(window.location.search);
+            const table = urlParams.get('table');
+            if (table) {
+                showData(table);
+            }
         }
+
+        // Xử lý sự kiện click cho các nút Sửa và Xóa
+        document.addEventListener('click', function(e) {
+        // Xóa
+        if (e.target.classList.contains('btn-delete')) {
+            if (!confirm('Xóa?')) return;
+            const table = e.target.getAttribute('data-table');
+            const id = e.target.getAttribute('data-id');
+            fetch(`/crud/${table}/${id}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: new URLSearchParams({'_method': 'DELETE'})
+            })
+            .then(res => {
+                if (res.ok) {
+                    showData(table); // Tải lại bảng sau khi xóa
+                } else {
+                    alert('Xóa thất bại!');
+                }
+            });
+        }
+        //sửa
+        if (e.target.classList.contains('btn-edit')) {
+        const table = e.target.getAttribute('data-table');
+        const id = e.target.getAttribute('data-id');
+        fetch(`/crud/${table}/${id}/edit`)
+            .then(res => res.text())
+            .then(formHtml => {
+                document.getElementById('data-table').innerHTML = formHtml;
+                // Gắn lại sự kiện submit cho form sửa
+                const editForm = document.querySelector('#dynamic-edit-form');
+                if (editForm) {
+                    editForm.onsubmit = function(ev) {
+                        ev.preventDefault();
+                        const formData = new FormData(editForm);
+                        fetch(`/crud/${table}/${id}`, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'X-Requested-With': 'XMLHttpRequest'
+                            },
+                            body: new URLSearchParams([...formData, ['_method', 'PUT']])
+                        })
+                        .then(res => {
+                            if (res.ok) {
+                                showData(table); // Cập nhật lại bảng sau khi sửa
+                            } else {
+                                alert('Cập nhật thất bại!');
+                            }
+                        });
+                    }
+                }
+            });
+    }
+    });
     </script>
 </body>
 </html>

@@ -33,7 +33,8 @@ class DynamicCrudController extends Controller
     {
         $data = $request->except('_token');
         DB::table($table)->insert($data);
-        return redirect()->route('dynamic_crud.index', $table)->with('success', 'Thêm thành công!');
+        //return redirect()->route('dynamic_crud.index', $table)->with('success', 'Thêm thành công!');
+        return redirect('/dashboard?table=' . $table)->with('success', 'Thêm thành công!');
     }
 
     // Hiển thị form sửa
