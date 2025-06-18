@@ -11,7 +11,8 @@ class DashboardController extends Controller
     public function getTables()
     {
         $table = DB::select('SHOW TABLES');
-        $dbName = env('DB_DATABASE');
+        // $dbName = env('DB_DATABASE');
+        $dbName = DB::getDatabaseName();
         $key = 'Tables_in_' . $dbName;
         $tableNames = array_map(function ($item) use ($key) {
             return $item->$key;
